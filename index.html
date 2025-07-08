@@ -15,13 +15,35 @@
     }
     h1, h2 {
       color: #222;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h2::after {
+      content: "+";
+      font-size: 1.5em;
+      transition: transform 0.3s;
+    }
+    h2.active::after {
+      content: "-";
     }
     .platform {
       background: #fff;
-      padding: 20px;
-      margin: 20px 0;
+      padding: 0 20px;
+      margin: 15px 0;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      max-height: 60px;
+      transition: max-height 0.3s ease-out;
+    }
+    .platform.active {
+      max-height: 5000px;
+      transition: max-height 0.5s ease-in;
+    }
+    .platform-content {
+      padding: 10px 0 20px;
     }
     code {
       background: #eee;
@@ -35,89 +57,335 @@
     a:hover {
       text-decoration: underline;
     }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 10px 0;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .step-number {
+      background: #575555;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-image {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
 <h1>Инструкция по подключению к Proxy/VPN через VLESS</h1>
 
-<p><strong>Благодарим вас за то, что выбрали нас! Будем рады, если вы оставите отзыв на Яндекс.Маркете.</strong></p>
 
 <div class="platform">
-<p>Вы получили на почту письмо с VLESS-ссылкой вида:</p>
-<pre><code>vless://uuid@host:port?...#VPN</code></pre>
-<p>Для включения прокси необходимо скачать клиент на ваше устройство</p>
-  <p>Вы можете скачать клиент на ПК прямо из нашего <a href="https://disk.yandex.ru/d/KhMc4610bCrf0g" target="_blank">Яндекс.Диска</a></p>
-
+  <h2>🔑 Ваша VLESS-ссылка</h2>
+  <div class="platform-content">
+    <p>Вы получили на почту письмо с VLESS-ссылкой вида:</p>
+    <pre><code>vless://7f3a5fdb-1237-4f9a-aeec-6bb85f917a9a@11.11.18.1:8080?encryption=none&security=reality&flow=xtls-rprx-vision&sni=www.cloudflare.com&fp=chrome&pbk=KJksjnEffksdjf23-KQ_BZfIUnsHkjA6GYUcgg&sid=5a3d8654&type=tcp&headerType=none&host=www.cloudflare.com#VPN-7f3a5fdb-1237-4f9a-aeec-6bb85f917a9a</code></pre>
+    <p>Скопируйте <strong>полностью</strong> свою vless-ссылку, которая пришла вам на почту.</p>
+    <p><strong>Не изменяйте ее и проверьте чтобы в ней не было пробелов!</strong></p>
+    <p>По всем вопросам пишите в <a href="https://t.me/somaxww" target="_blank">Телеграм</a></p>
+  </div>
 </div>
+
 <div class="platform">
   <h2>📱 Android</h2>
-  <p><strong>Клиент:</strong> <a href="https://play.google.com/store/apps/details?id=app.hiddify.com&hl=ru" target="_blank">Hiddify</a> (бесплатно)</p>
-  <ol>
-    <li>Установите <strong>Hiddify</strong> из Google Play.</li>
-    <li>Скопируйте вашу VLESS-ссылку.</li>
-    <li>Откройте Hiddify → нажмите <strong>Импорт из буфера обмена</strong>.</li>
-    <li>Нажмите кнопку <strong>Подключиться</strong>.</li>
-  </ol>
+  <div class="platform-content">
+    <p><strong>Клиент:</strong> <a href="https://play.google.com/store/apps/details?id=app.hiddify.com&hl=ru" target="_blank">Hiddify</a> (бесплатно)</p>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        Установите <strong>Hiddify</strong> из Google Play.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        Скопируйте полностью вашу VLESS-ссылку из письма.
+        <img src="res/vless.png" alt="vless" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        Откройте Hiddify → нажмите <strong>+Новый профиль</strong>.
+        <img src="res/and_1.jpg" alt="vless"  width="400" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        Далее выберите <strong>Добавить из буфера обмена</strong>.
+        <img src="res/and_2.jpg" alt="vless"  width="400" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        Нажмите кнопку <strong>Подключиться</strong>.
+
+      </div>
+
+    </div>
+    <img src="res/and_3.jpg" alt="vless"  width="400" class="step-image">
+<!--    <div class="step">-->
+<!--      <div class="step-number">6</div>-->
+<!--      <div class="step-content">-->
+<!--        Если вместо "Подключено" написано <strong>"Таймаут"</strong> необходимо удалить профиль и добавить его заново.</p>-->
+<!--        Если не помогло необходимо удалить приложение и скачать его заново.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
 </div>
 
 <div class="platform">
   <h2>🍏 iOS (iPhone/iPad)</h2>
-  <p><strong>Клиент:</strong> <a href="https://apps.apple.com/ru/app/streisand/id6450534064" target="_blank">Streisand</a> (бесплатно)</p>
-  <ol>
-    <li>Установите приложение из App Store.</li>
-    <li>Скопируйте вашу VLESS-ссылку.</li>
-    <li>Откройте Streisand → нажмите <strong>+</strong> → <strong>Добавить из буфера</strong>.</li>
-    <li>Нажмите синюю кнопку <strong>Подключиться</strong> для подключения.</li>
-  </ol>
+  <div class="platform-content">
+    <p><strong>Клиент:</strong> <a href="https://apps.apple.com/ru/app/streisand/id6450534064" target="_blank">Streisand</a> (бесплатно)</p>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        Установите приложение из App Store.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        Скопируйте полностью вашу VLESS-ссылку из письма.
+        <img src="res/vless.png" alt="vless" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        Откройте Streisand → нажмите <strong>+</strong> → <strong>Добавить из буфера</strong>.
+        <img src="res/str_1.jpeg" alt="Streisand" width="400" class="step-image">
+        <img src="res/str_2.jpeg" alt="Streisand" width="400" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        Нажмите кнопку <strong>Подключиться</strong> для подключения.
+        <img src="res/str_4.jpeg" alt="Streisand" width="400" class="step-image">
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="platform">
   <h2>💻 Windows</h2>
-  <p><strong>Клиент:</strong> <a href="https://hiddify.com/" target="_blank">Hiddify для Windows</a> (бесплатно)</p>
-  <ol>
-    <li>Перейдите на сайт <a href="https://hiddify.com/" target="_blank">hiddify.com</a>.</li>
-    <li>Скачайте и установите клиент для Windows.</li>
-    <li>Скопируйте вашу VLESS-ссылку.</li>
-    <li>Откройте программу → нажмите <strong>Импорт</strong> и вставьте вашу VLESS-ссылку.</li>
-    <li>Нажмите <strong>Подключиться</strong>.</li>
-  </ol>
+  <div class="platform-content">
+    <p><strong>Клиент:</strong> <a href="https://hiddify.com/" target="_blank">Hiddify для Windows</a> (бесплатно)</p>
 
-  <p>Если не работает (не открывается Hiddify или таймаут) -> <strong>Попробуйте:</strong> <a href="https://en.nekoray.org" target="_blank">NekoRay</a></p>
-  <ol>
-    <li>Перейдите на сайт <a href="https://en.nekoray.org" target="_blank">nekoray.org</a>.</li>
-    <li>Скачайте и установите клиент для Windows.</li>
-    <li>Скопируйте вашу VLESS-ссылку.</li>
-    <li>Откройте программу → нажмите <strong>Профили</strong> -> Добавить профиль из буфера.</li>
-    <li>Нажмите правой кнопкой мыши на добавленный профиль и выберите <strong>Запустить</strong>.</li>
-  </ol>
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        Скачайте и установите клиент для Windows из нашего <a href="https://disk.yandex.ru/d/KhMc4610bCrf0g" target="_blank">Яндекс.Диска </a> или из <a href="https://apps.microsoft.com/detail/9pdfnl3qv2s5?hl=ru-RU&gl=RU" target="_blank">Microsoft Store</a>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        Скопируйте полностью вашу VLESS-ссылку из письма.
+        <img src="res/vless.png" alt="vless" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        Откройте программу и перейдите в раздел <strong>Главная</strong>
+        <img src="res/hid_1.png" alt="Hiddify" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        Нажмите <strong>+Новый профиль</strong>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        Выберите <strong>Добавить из буфера обмена</strong>.
+        <img src="res/hid_2.png" alt="Hiddify" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-content">
+        Нажмите <strong>Подключиться</strong>.
+        <img src="res/hid_6.png" alt="Hiddify" class="step-image">
+      </div>
+    </div>
+
+    <p>Если не работает, перейдите в раздел <strong>Параметры конфигурации</strong> -> Измените регион с России на любой другой</p>
+      <img src="res/hid_5.png" alt="Hiddify" class="step-image">
+  </div>
 </div>
 
 <div class="platform">
+  <h2>💻 Windows (NekoRay)</h2>
+  <div class="platform-content">
+
+    <p><strong>Клиент:</strong> NekoRay</p>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        Скачайте и установите клиент для Windows из нашего <a href="https://disk.yandex.ru/d/KhMc4610bCrf0g" target="_blank">Яндекс.Диска</a>.
+        <img src="res/nek_1.png" alt="Архив NekoRay" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        Скопируйте полностью вашу VLESS-ссылку из письма.
+        <img src="res/vless.png" alt="vless" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        Откройте программу → нажмите <strong>Профили</strong> -> Добавить профиль из буфера обмена.
+        <img src="res/nek_2.png" alt="Архив NekoRay" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        Нажмите правой кнопкой мыши на добавленный профиль и выберите <strong>Запустить</strong>.
+        <img src="res/nek_3.png" alt="Архив NekoRay" class="step-image">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="platform">
   <h2>🍎 macOS</h2>
-  <p><strong>Клиент:</strong> <a href="https://apps.apple.com/us/app/v2box/id6446814690" target="_blank">v2Box</a> (бесплатно)</p>
-  <ol>
-    <li>Установите <strong>v2Box</strong> из Mac App Store.</li>
-    <li>Скопируйте вашу VLESS-ссылку.</li>
-    <li>Откройте приложение и перейдите в раздел <strong>Configs</strong>.</li>
-    <li>Нажмите <strong>+</strong> → <strong>Import v2ray from clipboard</strong>.</li>
-    <li>Нажмите <strong>Tap to Connect</strong>.</li>
-  </ol>
+  <div class="platform-content">
+    <p><strong>Клиент:</strong> <a href="https://apps.apple.com/us/app/v2box/id6446814690" target="_blank">v2Box</a> (бесплатно)</p>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        Установите <strong>v2Box</strong> из Mac App Store.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        Скопируйте полностью вашу VLESS-ссылку из письма.
+        <img src="res/vless.png" alt="vless" class="step-image">
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        Откройте приложение и перейдите в раздел <strong>Configs</strong>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        Нажмите <strong>+</strong> → <strong>Import v2ray from clipboard</strong>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        Нажмите <strong>Tap to Connect</strong>.
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="platform">
   <h2>Роутер Keenetic (Entware)</h2>
-  <p>Подробная инструкция по установке Vless - <a href="https://rockblack.pro/vpn/dopolnitelno/vless-keenetic" target="_blank">Установка и настройка Vless на роутере Keenetic</a>.</p>
+  <div class="platform-content">
+    <p>Подробная инструкция по установке Vless - <a href="https://rockblack.pro/vpn/dopolnitelno/vless-keenetic" target="_blank">Установка и настройка Vless на роутере Keenetic</a>.</p>
+  </div>
 </div>
 
-
-<hr>
 <div class="platform">
-<h2>🔗 Где взять VLESS-ссылку?</h2>
-<p>Она была отправлена к Вам на почту вместе с инструкцией и выглядит так:</p>
-<pre><code>vless://xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@ip:port?...#VPN</code></pre>
-
-<p>Скопируйте её полностью и следуйте инструкции для своей платформы выше.</p>
-<p>По всем вопросам пишите в <a href="https://t.me/somaxww" target="_blank">Телеграм</a></p>
+  <h2>🔗 Где взять VLESS-ссылку?</h2>
+  <div class="platform-content">
+    <p>Она была отправлена к Вам на почту вместе с инструкцией и выглядит так:</p>
+    <pre><code>vless://7f3a5fdb-1237-4f9a-aeec-6bb85f917a9a@11.11.18.1:8080?encryption=none&security=reality&flow=xtls-rprx-vision&sni=www.cloudflare.com&fp=chrome&pbk=KJksjnEffksdjf23-KQ_BZfIUnsHkjA6GYUcgg&sid=5a3d8654&type=tcp&headerType=none&host=www.cloudflare.com#VPN-7f3a5fdb-1237-4f9a-aeec-6bb85f917a9a</code></pre>
+    <p>Скопируйте её полностью и следуйте инструкции для своей платформы выше.</p>
+    <p>По всем вопросам пишите в <a href="https://t.me/somaxww" target="_blank">Телеграм</a></p>
+    <p><strong>Благодарим вас за то, что выбрали нас! Будем рады, если вы оставите отзыв на Яндекс.Маркете.</strong></p>
   </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const platforms = document.querySelectorAll('.platform');
+
+    platforms.forEach(platform => {
+      const header = platform.querySelector('h2');
+      const content = platform.querySelector('.platform-content');
+
+      header.addEventListener('click', () => {
+        platform.classList.toggle('active');
+        header.classList.toggle('active');
+      });
+    });
+
+    // Закрыть все блоки при загрузке (кроме первого)
+    platforms.forEach((platform, index) => {
+      if (index !== 0) {
+        platform.classList.remove('active');
+      } else {
+        platform.classList.add('active');
+        platform.querySelector('h2').classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>
